@@ -124,8 +124,10 @@ footer{background:#0e0e0e;border-top:1px solid rgba(201,168,76,0.15);padding:40p
 
 [data-lang=“es”]{display:none;}
 body.lang-es [data-lang=“en”]{display:none;}
-body.lang-es [data-lang=“es”]{display:revert;}
-body.lang-es span[data-lang=“es”]{display:inline;}
+body.lang-es [data-lang="es"]{display:inline !important;}
+body.lang-es p[data-lang="es"]{display:block !important;}
+body.lang-es div[data-lang="es"]{display:block !important;}
+body.lang-es [data-lang="en"]{display:none !important;}
 body.lang-es span[data-lang=“en”]{display:none;}
 span[data-lang=“es”]{display:none;}
 
