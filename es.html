@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONYX ARCHITECTURAL | 3M DI-NOC Miami</title>
+<link rel="alternate" hreflang="en" href="/">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#9A7A30;
+  --black:#0e0e0e;--black-soft:#161616;--black-card:#1e1e1e;
+  --white:#F5F0E8;--white-dim:#C8C0B0;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:rgba(14,14,14,0.96);border-bottom:1px solid rgba(201,168,76,0.2);}
+.logo{font-family:‘Cormorant Garamond’,serif;font-size:22px;font-weight:300;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;line-height:1.1;}
+.logo span{color:#F5F0E8;}
+.nav-links{display:none;}
+.lang-toggle{font-size:11px;letter-spacing:2px;color:#C9A84C;border:1px solid #9A7A30;padding:6px 14px;cursor:pointer;background:transparent;transition:all 0.3s;text-decoration:none;display:inline-block;}
+.lang-toggle:hover{background:#C9A84C;color:#0e0e0e;}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 24px 60px;position:relative;overflow:hidden;background:linear-gradient(160deg,#1a1005 0%,#0e0e0e 60%,#0a0a0a 100%);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.06) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.hero-glow{position:absolute;top:20%;right:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,0.15) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #9A7A30;padding:8px 16px;margin-bottom:28px;width:fit-content;}
+.hero-badge::before{content:’’;width:6px;height:6px;background:#C9A84C;border-radius:50%;flex-shrink:0;}
+.hero-badge span{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#C9A84C;line-height:1.4;}
+.hero h1{font-family:‘Cormorant Garamond’,serif;font-size:clamp(44px,12vw,80px);font-weight:300;line-height:1.05;margin-bottom:24px;}
+.hero h1 em{font-style:italic;color:#C9A84C;}
+.hero-desc{font-size:14px;line-height:1.9;color:#C8C0B0;max-width:480px;margin-bottom:40px;}
+.hero-ctas{display:flex;flex-direction:column;gap:16px;align-items:flex-start;}
+.btn-primary{background:#C9A84C;color:#0e0e0e;padding:16px 36px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;text-decoration:none;display:inline-block;font-family:‘Montserrat’,sans-serif;transition:all 0.3s;}
+.btn-primary:hover{background:#E8C97A;}
+.btn-secondary{color:#C8C0B0;font-size:11px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:8px;}
+.btn-secondary::after{content:‘→’;}
+
+.cert-strip{background:#C9A84C;padding:16px 24px;overflow-x:auto;}
+.cert-inner{display:flex;align-items:center;gap:24px;min-width:max-content;}
+.cert-item{display:flex;align-items:center;gap:10px;}
+.cert-icon{width:28px;height:28px;border:2px solid #0e0e0e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#0e0e0e;flex-shrink:0;}
+.cert-text{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:#0e0e0e;white-space:nowrap;}
+.cert-div{width:1px;height:20px;background:rgba(0,0,0,0.25);flex-shrink:0;}
+
+.section{padding:80px 24px;background:#0e0e0e;}
+.section.alt{background:#161616;}
+.sec-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.sec-label::before{content:’’;width:30px;height:1px;background:#C9A84C;}
+.sec-title{font-family:‘Cormorant Garamond’,serif;font-size:clamp(32px,8vw,52px);font-weight:300;line-height:1.1;margin-bottom:50px;}
+.sec-title em{font-style:italic;color:#C9A84C;}
+
+.services-list{display:flex;flex-direction:column;gap:3px;}
+.svc-card{background:#1e1e1e;padding:36px 28px;border:1px solid rgba(201,168,76,0.15);border-top:2px solid #C9A84C;}
+.svc-num{font-family:‘Cormorant Garamond’,serif;font-size:48px;color:rgba(201,168,76,0.25);line-height:1;margin-bottom:16px;}
+.svc-name{font-family:‘Cormorant Garamond’,serif;font-size:24px;margin-bottom:14px;}
+.svc-desc{font-size:13px;line-height:1.8;color:#C8C0B0;}
+.svc-price{margin-top:20px;padding-top:16px;border-top:1px solid rgba(201,168,76,0.2);font-size:11px;letter-spacing:1px;color:#C9A84C;}
+
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.g-item{height:160px;position:relative;overflow:hidden;}
+.g-item:first-child{grid-column:1/-1;height:220px;}
+.g-fill{width:100%;height:100%;position:relative;}
+.g1 .g-fill{background:linear-gradient(160deg,#2a1a08,#3d2410,#2a1a08);}
+.g2 .g-fill{background:linear-gradient(160deg,#1a1a1a,#2e2e2e,#1a1a1a);}
+.g3 .g-fill{background:radial-gradient(ellipse at 30% 40%,#2a1e0e,#181818);}
+.g4 .g-fill{background:linear-gradient(135deg,#1e1408,#322010,#1e1408);}
+.g5 .g-fill{background:linear-gradient(160deg,#181818,#262626,#181818);}
+.g1 .g-fill::after{content:’’;position:absolute;inset:0;background:repeating-linear-gradient(88deg,rgba(201,168,76,0.1) 0px,rgba(201,168,76,0.1) 2px,transparent 2px,transparent 16px);}
+.g2 .g-fill::after{content:’’;position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(200,200,200,0.1) 0px,rgba(200,200,200,0.1) 1px,transparent 1px,transparent 6px);}
+.g3 .g-fill::after{content:’’;position:absolute;inset:0;background:radial-gradient(circle at 40% 40%,rgba(201,168,76,0.18),transparent 60%);}
+.g4 .g-fill::after{content:’’;position:absolute;inset:0;background:repeating-linear-gradient(88deg,rgba(201,168,76,0.08) 0px,rgba(201,168,76,0.08) 2px,transparent 2px,transparent 14px);}
+.g5 .g-fill::after{content:’’;position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(200,200,200,0.08) 0px,rgba(200,200,200,0.08) 1px,transparent 1px,transparent 10px);}
+.g-label{position:absolute;bottom:12px;left:14px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#C9A84C;z-index:2;text-shadow:0 1px 4px rgba(0,0,0,0.8);}
+.g-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.6) 0%,transparent 60%);}
+
+.process-list{display:flex;flex-direction:column;gap:0;}
+.proc-step{display:flex;gap:20px;padding:28px 0;border-bottom:1px solid rgba(201,168,76,0.15);}
+.proc-step:last-child{border-bottom:none;}
+.proc-num{width:52px;height:52px;border:1px solid #9A7A30;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:‘Cormorant Garamond’,serif;font-size:22px;color:#C9A84C;flex-shrink:0;}
+.proc-title{font-family:‘Cormorant Garamond’,serif;font-size:22px;margin-bottom:8px;}
+.proc-desc{font-size:13px;line-height:1.8;color:#C8C0B0;}
+
+.contact-info{margin-bottom:40px;}
+.contact-info h3{font-family:‘Cormorant Garamond’,serif;font-size:28px;font-weight:300;margin-bottom:12px;}
+.contact-info p{font-size:13px;line-height:1.9;color:#C8C0B0;margin-bottom:28px;}
+.c-detail{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(201,168,76,0.15);}
+.c-icon{width:36px;height:36px;border:1px solid #9A7A30;display:flex;align-items:center;justify-content:center;font-size:14px;color:#C9A84C;flex-shrink:0;}
+.c-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#C9A84C;margin-bottom:3px;}
+.c-val{font-size:13px;color:#F5F0E8;}
+.c-val a{color:inherit;text-decoration:none;}
+
+.quote-form{display:flex;flex-direction:column;gap:16px;}
+.f-group{display:flex;flex-direction:column;gap:6px;}
+.f-group label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C9A84C;}
+.f-group input,.f-group select,.f-group textarea{background:#1e1e1e;border:1px solid rgba(201,168,76,0.25);color:#F5F0E8;padding:14px 16px;font-size:14px;font-family:‘Montserrat’,sans-serif;font-weight:300;outline:none;width:100%;transition:border-color 0.3s;-webkit-appearance:none;appearance:none;border-radius:0;}
+.f-group input:focus,.f-group select:focus,.f-group textarea:focus{border-color:#C9A84C;}
+.f-group textarea{height:100px;resize:none;}
+.f-group select option{background:#1e1e1e;color:#F5F0E8;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.btn-submit{background:#C9A84C;color:#0e0e0e;border:none;padding:18px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;font-family:‘Montserrat’,sans-serif;cursor:pointer;width:100%;transition:all 0.3s;}
+.btn-submit:hover{background:#E8C97A;}
+.f-note{font-size:11px;color:#C8C0B0;text-align:center;opacity:0.6;}
+.thank-you{display:none;text-align:center;padding:40px 20px;border:1px solid rgba(201,168,76,0.3);}
+.thank-you.active{display:block;}
+.thank-you h3{font-family:‘Cormorant Garamond’,serif;font-size:28px;color:#C9A84C;margin-bottom:10px;}
+.thank-you p{font-size:13px;color:#C8C0B0;line-height:1.7;}
+
+.wa-float{position:fixed;bottom:28px;right:20px;z-index:999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.wa-label{background:#1e1e1e;border:1px solid rgba(201,168,76,0.25);padding:7px 14px;font-size:11px;color:#C8C0B0;white-space:nowrap;letter-spacing:0.5px;}
+.wa-btn{width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,0.4);text-decoration:none;transition:transform 0.3s;}
+.wa-btn:hover{transform:scale(1.1);}
+.wa-btn svg{width:30px;height:30px;fill:white;}
+
+footer{background:#0e0e0e;border-top:1px solid rgba(201,168,76,0.15);padding:40px 24px;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center;}
+.footer-logo{font-family:‘Cormorant Garamond’,serif;font-size:22px;letter-spacing:4px;color:#C9A84C;}
+.footer-cert{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C8C0B0;}
+.footer-cert strong{color:#C9A84C;}
+.footer-copy{font-size:10px;color:#C8C0B0;opacity:0.4;}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(min-width:768px){
+nav{padding:24px 60px;}
+.nav-links{display:flex;gap:40px;list-style:none;}
+.nav-links a{color:#C8C0B0;text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s;}
+.nav-links a:hover{color:#C9A84C;}
+.hero{padding:120px 60px 80px;flex-direction:row;align-items:center;}
+.hero h1{font-size:clamp(52px,6vw,86px);}
+.hero-ctas{flex-direction:row;align-items:center;}
+.cert-inner{min-width:unset;justify-content:center;}
+.section{padding:100px 60px;}
+.section.alt{padding:100px 60px;}
+.services-list{display:grid;grid-template-columns:repeat(3,1fr);}
+.gallery-grid{grid-template-columns:2fr 1fr 1fr;grid-template-rows:260px 260px;}
+.g-item{height:auto;}
+.g-item:first-child{grid-row:1/3;grid-column:auto;height:auto;}
+.process-list{display:grid;grid-template-columns:repeat(4,1fr);}
+.proc-step{flex-direction:column;padding:0 20px;border-bottom:none;}
+.proc-num{margin-bottom:20px;}
+.f-row{gap:16px;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+footer{flex-direction:row;justify-content:space-between;padding:50px 60px;}
+.wa-float{right:36px;bottom:36px;}
+}
+</style>
+
+</head>
+<body>
+
+<div class="wa-float">
+  <div class="wa-label">Escríbenos ahora</div>
+  <a href="https://wa.me/17863444819" class="wa-btn" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<nav>
+  <div class="logo">ONYX <span>ARCHITECTURAL</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Servicios</a></li>
+    <li><a href="#gallery">Galería</a></li>
+    <li><a href="#process">Proceso</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <a href="/" class="lang-toggle">EN</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div style="position:relative;z-index:2;max-width:680px;">
+    <div class="hero-badge"><span>Especialista 3M DI-NOC™ · Miami, FL</span></div>
+    <h1>Transforma Cualquier<br><em>Superficie</em> En<br>Lujo</h1>
+    <p class="hero-desc">Acabados arquitectónicos premium 3M DI-NOC para espacios comerciales, interiores de lujo y cabinas de yates. Sin construcción. Sin tiempo de inactividad. Resultados extraordinarios.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Solicitar Cotización</a>
+      <a href="#gallery" class="btn-secondary">Ver Nuestros Trabajos</a>
+    </div>
+  </div>
+</section>
+
+<div class="cert-strip">
+  <div class="cert-inner">
+    <div class="cert-item"><div class="cert-icon">3M</div><div class="cert-text">Especialista 3M DI-NOC™</div></div>
+    <div class="cert-div"></div>
+    <div class="cert-item"><div class="cert-icon">✦</div><div class="cert-text">900+ Acabados</div></div>
+    <div class="cert-div"></div>
+    <div class="cert-item"><div class="cert-icon">10</div><div class="cert-text">Años de Garantía</div></div>
+    <div class="cert-div"></div>
+    <div class="cert-item"><div class="cert-icon">✓</div><div class="cert-text">Licenciado y Asegurado</div></div>
+  </div>
+</div>
+
+<section class="section" id="services">
+  <div class="reveal">
+    <div class="sec-label">Nuestros Servicios</div>
+    <div class="sec-title">Superficies Reinventadas.<br><em>Espacios Transformados.</em></div>
+  </div>
+  <div class="services-list">
+    <div class="svc-card reveal">
+      <div class="svc-num">01</div>
+      <div class="svc-name">Interiores Comerciales</div>
+      <p class="svc-desc">Oficinas, lobbies, restaurantes, tiendas y hoteles. Transforma tu espacio comercial de la noche a la mañana con acabados que impresionan a tus clientes y elevan tu marca.</p>
+      <div class="svc-price">Desde $12 / pie cuadrado instalado</div>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">02</div>
+      <div class="svc-name">Interiores de Yates</div>
+      <p class="svc-desc">Renovación completa de interiores para yates y superyates. Acabados resistentes al ambiente marino para cabinas, cocinas y salones. Mínimo tiempo de inactividad, máximos resultados.</p>
+      <div class="svc-price">Desde $25,000 / yate completo</div>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-num">03</div>
+      <div class="svc-name">Residencial y Flipping</div>
+      <p class="svc-desc">Cocinas, gabinetes, puertas y paredes de acento. La solución perfecta para inversores que necesitan resultados impactantes rápido, sin el costo de una remodelación completa.</p>
+      <div class="svc-price">Desde $3,000 / cocina</div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="gallery">
+  <div class="reveal">
+    <div class="sec-label">Nuestros Trabajos</div>
+    <div class="sec-title">Cada Superficie<br>Cuenta una <em>Historia</em></div>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="g-item g1"><div class="g-fill"></div><div class="g-overlay"></div><div class="g-label">Madera Fina · Hotel · Miami Beach</div></div>
+    <div class="g-item g2"><div class="g-fill"></div><div class="g-overlay"></div><div class="g-label">Metálico · Oficina · Brickell</div></div>
+    <div class="g-item g3"><div class="g-fill"></div><div class="g-overlay"></div><div class="g-label">Piedra · Yate · Miami Marina</div></div>
+    <div class="g-item g4"><div class="g-fill"></div><div class="g-overlay"></div><div class="g-label">Madera · Cocina · Coral Gables</div></div>
+    <div class="g-item g5"><div class="g-fill"></div><div class="g-overlay"></div><div class="g-label">Carbono · Restaurante · Wynwood</div></div>
+  </div>
+</section>
+
+<section class="section" id="process">
+  <div class="reveal">
+    <div class="sec-label">Cómo Funciona</div>
+    <div class="sec-title">Proceso Simple.<br>Resultados <em>Extraordinarios.</em></div>
+  </div>
+  <div class="process-list reveal">
+    <div class="proc-step">
+      <div class="proc-num">1</div>
+      <div class="proc-body">
+        <div class="proc-title">Consulta</div>
+        <p class="proc-desc">Visita gratuita para evaluar tu espacio y recomendar los acabados perfectos entre 900+ opciones.</p>
+      </div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-num">2</div>
+      <div class="proc-body">
+        <div class="proc-title">Diseño</div>
+        <p class="proc-desc">Seleccionamos muestras adaptadas a tu visión estética, presupuesto y necesidades del espacio.</p>
+      </div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-num">3</div>
+      <div class="proc-body">
+        <div class="proc-title">Instalación</div>
+        <p class="proc-desc">Nuestro equipo instala con precisión. La mayoría de proyectos en 1–3 días sin interrupciones.</p>
+      </div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-num">4</div>
+      <div class="proc-body">
+        <div class="proc-title">Disfruta</div>
+        <p class="proc-desc">Tu espacio transformado, respaldado por garantía 3M de 10 años y nuestro soporte continuo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="contact">
+  <div class="reveal">
+    <div class="sec-label">Solicitar Cotización</div>
+    <div class="sec-title">¿Listo para <em>Transformar</em><br>Tu Espacio?</div>
+  </div>
+  <div class="contact-grid reveal">
+    <div class="contact-info">
+      <h3>Hablemos de tu proyecto</h3>
+      <p>Respondemos en menos de 2 horas en horario laboral. Consulta gratuita y cotización en sitio para Miami, Fort Lauderdale y Palm Beach.</p>
+      <div class="c-detail"><div class="c-icon">📱</div><div><div class="c-lbl">WhatsApp / Teléfono</div><div class="c-val">(786) 344-4819</div></div></div>
+      <div class="c-detail"><div class="c-icon">✉</div><div><div class="c-lbl">Email</div><div class="c-val"><a href="mailto:info@onyxarchitectural.com">info@onyxarchitectural.com</a></div></div></div>
+      <div class="c-detail"><div class="c-icon">📍</div><div><div class="c-lbl">Área de Servicio</div><div class="c-val">Miami · Fort Lauderdale · Atlanta</div></div></div>
+    </div>
+    <div>
+      <form class="quote-form" id="quoteForm" onsubmit="submitForm(event)">
+        <div class="f-row">
+          <div class="f-group"><label>Nombre</label><input type="text" name="fname" required placeholder="Juan"></div>
+          <div class="f-group"><label>Apellido</label><input type="text" name="lname" required placeholder="García"></div>
+        </div>
+        <div class="f-row">
+          <div class="f-group"><label>Email</label><input type="email" name="email" required placeholder="juan@ejemplo.com"></div>
+          <div class="f-group"><label>Teléfono</label><input type="tel" name="phone" placeholder="(786) 000-0000"></div>
+        </div>
+        <div class="f-group">
+          <label>Tipo de Servicio</label>
+          <select name="service" required>
+            <option value="" disabled selected>Seleccionar servicio</option>
+            <option value="Commercial">Interior Comercial</option>
+            <option value="Yacht">Interior de Yate</option>
+            <option value="Residential">Residencial</option>
+            <option value="Flipping">Property Flipping</option>
+            <option value="Other">Otro</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label>Área Estimada</label>
+          <select name="sqft">
+            <option value="" disabled selected>Seleccionar área</option>
+            <option>Menos de 100 pie²</option>
+            <option>100 – 500 pie²</option>
+            <option>500 – 1,000 pie²</option>
+            <option>1,000 – 5,000 pie²</option>
+            <option>5,000+ pie²</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label>Detalles del Proyecto</label>
+          <textarea name="message" placeholder="Describe tu espacio y visión..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Solicitar Cotización Gratis →</button>
+        <p class="f-note">Respondemos en 2 horas hábiles · Sin compromiso</p>
+      </form>
+      <div class="thank-you" id="thankYou">
+        <h3>✦</h3>
+        <h3>¡Gracias!</h3>
+        <p>Recibimos tu solicitud y te contactaremos en menos de 2 horas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">ONYX ARCHITECTURAL</div>
+  <div class="footer-cert"><strong>3M™ DI-NOC™</strong><br>Especialista · Miami, FL<br>Since 2025</div>
+  <div class="footer-copy">© 2025 ONYX ARCHITECTURAL LLC</div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*80);
+  });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function submitForm(e){
+  e.preventDefault();
+  const f=e.target;
+  const fname=f.fname.value,lname=f.lname.value,email=f.email.value,phone=f.phone.value,service=f.service.value,sqft=f.sqft.value,msg=f.message.value;
+  document.getElementById('quoteForm').style.display='none';
+  document.getElementById('thankYou').classList.add('active');
+  const wa=`🔔 NUEVA COTIZACIÓN - Onyx Architectural%0A%0A👤 ${fname} ${lname}%0A📧 ${email}%0A📱 ${phone}%0A🏗️ ${service}%0A📐 ${sqft}%0A💬 ${msg}`;
+  setTimeout(()=>window.open('https://wa.me/17863444819?text='+wa,'_blank'),1200);
+}
+</script>
+
+</body>
+</html>
